@@ -1,4 +1,4 @@
-![alt text](https://github.com/EDU-DevMan/c2_upload_photos_to_telegram/blob/main/images/space.jpg.JPG?raw=true)
+![alt text](https://github.com/EDU-DevMan/c2_upload_photos_to_telegram/blob/main/images/space.JPG?raw=true)
 
 # О проекте
 
