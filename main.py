@@ -1,6 +1,5 @@
 import requests
 import os
-import errno
 
 
 PATH_IMAGES = "images"
