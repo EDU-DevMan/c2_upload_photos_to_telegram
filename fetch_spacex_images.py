@@ -1,11 +1,10 @@
 import requests
-import os
-from requests.exceptions import HTTPError
 import argparse
 import sys
 from saves_images_directory import saves_image
 from get_checked_path import checked_path
 from urllib.parse import urlparse, unquote
+from get_image_file_name import returns_file_extension
 
 
 PATH_IMAGES = "images"
@@ -17,10 +16,6 @@ def get_launch_id():
     parser.add_argument('launch', nargs='?')
 
     return parser
-
-def returns_file_extension(url):
-
-    return unquote(os.path.split(urlparse(url).path)[1])
 
 
 if __name__ == '__main__':

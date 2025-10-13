@@ -1,20 +1,14 @@
-import os
 import requests
-from requests.exceptions import HTTPError
 from urllib.parse import urlparse, unquote
 from environs import Env
 from saves_images_directory import saves_image
 from get_checked_path import checked_path
+from get_image_file_name import returns_file_extension
 
 
 PATH_IMAGES = "images"
 URLS_SPACEX = "https://api.nasa.gov/planetary/apod"
 NUMBER_PHOTOS = 2
-
-
-def returns_file_extension(url):
-
-    return unquote(os.path.split(urlparse(url).path)[1])
 
 
 if __name__ == '__main__':
