@@ -3,17 +3,11 @@ import os
 from requests.exceptions import HTTPError
 import argparse
 import sys
+from create_image_directory import makes_directory
 
 
 PATH_IMAGES = "images"
 URLS_SPACEX = "https://api.spacexdata.com/v5/launches"
-
-
-def creates_folder(filename):
-    try:
-        return os.makedirs(filename, exist_ok=True)
-    except FileExistsError:
-        return filename
 
 
 def get_checked_path(url):
@@ -35,7 +29,7 @@ def get_checked_path(url):
         return None
 
 
-def downloads_image(path, img_num, img):
+def saves_image(path, img_num, img):
     with open('{}/{}'.format(path,
                              "spacex_{}.jpg".format(img_num)
                              ), 'wb') as file:
@@ -52,7 +46,7 @@ def get_launch_id():
 if __name__ == '__main__':
 
     if not os.path.exists(PATH_IMAGES):
-        creates_folder(PATH_IMAGES)
+        makes_directory(PATH_IMAGES)
 
     parser = get_launch_id()
     namespace = parser.parse_args(sys.argv[1:])
@@ -65,7 +59,7 @@ if __name__ == '__main__':
                     for img_num, img in enumerate(
                             jpg_url["links"]["flickr"]["original"]):
 
-                        downloads_image(
+                        saves_image(
                             PATH_IMAGES, img_num, requests.get(img).content)
                     break
 
@@ -76,5 +70,5 @@ if __name__ == '__main__':
             for img_num, img in enumerate(
                     namespace_launches.json()["links"]["flickr"]["original"]):
 
-                downloads_image(
+                saves_image(
                     PATH_IMAGES, img_num, requests.get(img).content)
