@@ -1,27 +1,18 @@
 import requests
-import argparse
 import sys
 from saves_images_directory import saves_image
 from get_checked_path import checked_path
-from urllib.parse import urlparse, unquote
-from get_image_file_name import returns_file_extension
+from get_image_name import returns_file_extension
+from launch_id import get_launch_id
 
 
 PATH_IMAGES = "images"
 URLS_SPACEX = "https://api.spacexdata.com/v5/launches"
 
 
-def get_launch_id():
-    parser = argparse.ArgumentParser()
-    parser.add_argument('launch', nargs='?')
-
-    return parser
-
-
 if __name__ == '__main__':
 
-    parser = get_launch_id()
-    namespace = parser.parse_args(sys.argv[1:])
+    namespace = get_launch_id().parse_args(sys.argv[1:])
 
     if namespace.launch is None:
         response_launches = checked_path(URLS_SPACEX)
