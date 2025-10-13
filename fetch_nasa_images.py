@@ -6,7 +6,7 @@ from get_image_name import returns_file_extension
 
 
 PATH_IMAGES = "images"
-URLS_SPACEX = "https://api.nasa.gov/planetary/apod"
+URL_NASA = "https://api.nasa.gov/planetary/apod"
 NUMBER_PHOTOS = 2
 
 
@@ -16,8 +16,8 @@ if __name__ == '__main__':
 
     nasa_api = env('NASA_API')
 
-    if checked_path(URLS_SPACEX, NUMBER_PHOTOS, nasa_api):
-        for url in checked_path(URLS_SPACEX, NUMBER_PHOTOS, nasa_api).json():
+    if checked_path(URL_NASA, NUMBER_PHOTOS, nasa_api):
+        for url in checked_path(URL_NASA, NUMBER_PHOTOS, nasa_api).json():
             img_name = returns_file_extension(url["url"])
             saves_image(
                 PATH_IMAGES, img_name, requests.get(url["url"]).content)
