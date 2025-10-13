@@ -7,7 +7,7 @@ from launch_id_spacex import get_launch_id
 
 
 PATH_IMAGES = "images"
-URLS_SPACEX = "https://api.spacexdata.com/v5/launches"
+URL_SPACEX = "https://api.spacexdata.com/v5/launches"
 
 
 if __name__ == '__main__':
@@ -15,7 +15,7 @@ if __name__ == '__main__':
     namespace = get_launch_id().parse_args(sys.argv[1:])
 
     if namespace.launch is None:
-        response_urls = checked_path(URLS_SPACEX)
+        response_urls = checked_path(URL_SPACEX)
         if response_urls:
             for image_url in response_urls.json()[::-1]:
                 original_image_url = image_url["links"]["flickr"]["original"]
@@ -29,7 +29,7 @@ if __name__ == '__main__':
 
     else:
         response_urls = checked_path('{}/{}'.format(
-            URLS_SPACEX, namespace.launch))
+            URL_SPACEX, namespace.launch))
         if response_urls:
             for image in response_urls.json()["links"]["flickr"]["original"]:
                 saves_image(
