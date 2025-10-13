@@ -22,7 +22,7 @@ def checked_path(url, num_phots='', *api):
         elif e.response.status_code == 403:
             print(f"🛑 Доступ запрещен{url}")
             print(f"Ошибка: {e}")
-            return None            
+            return None
         else:
             print(f"⚠️ Другая HTTP ошибка: {e}")
             raise
