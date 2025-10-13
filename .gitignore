@@ -4,3 +4,4 @@ __pycache__
 .env
 images/
 fetch_nasa_epic_images.py
+upload_wikimedia.py

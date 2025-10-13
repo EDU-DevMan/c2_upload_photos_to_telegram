@@ -3,7 +3,7 @@ import requests
 from requests.exceptions import HTTPError
 from urllib.parse import urlparse, unquote
 from environs import Env
-from create_image_directory import makes_directory
+from saves_images_directory import saves_image
 
 
 PATH_IMAGES = "images"
@@ -36,13 +36,6 @@ def get_checked_path(url, api):
         return None
 
 
-def saves_image(path, img_num, img):
-    with open('{}/{}'.format(path,
-                             "{}".format(img_num)
-                             ), 'wb') as file:
-        file.write(img)
-
-
 def returns_file_extension(url):
 
     return unquote(os.path.split(urlparse(url).path)[1])
@@ -53,9 +46,6 @@ if __name__ == '__main__':
     env.read_env()
 
     nasa_api = env('NASA_API')
-
-    if not os.path.exists(PATH_IMAGES):
-        makes_directory(PATH_IMAGES)
 
     if get_checked_path(URLS_SPACEX, nasa_api):
         for url in get_checked_path(URLS_SPACEX, nasa_api).json():

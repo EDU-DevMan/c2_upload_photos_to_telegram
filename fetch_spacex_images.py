@@ -3,7 +3,8 @@ import os
 from requests.exceptions import HTTPError
 import argparse
 import sys
-from create_image_directory import makes_directory
+from saves_images_directory import saves_image
+from urllib.parse import urlparse, unquote
 
 
 PATH_IMAGES = "images"
@@ -29,24 +30,18 @@ def get_checked_path(url):
         return None
 
 
-def saves_image(path, img_num, img):
-    with open('{}/{}'.format(path,
-                             "spacex_{}.jpg".format(img_num)
-                             ), 'wb') as file:
-        file.write(img)
-
-
 def get_launch_id():
     parser = argparse.ArgumentParser()
     parser.add_argument('launch', nargs='?')
 
     return parser
 
+def returns_file_extension(url):
+
+    return unquote(os.path.split(urlparse(url).path)[1])
+
 
 if __name__ == '__main__':
-
-    if not os.path.exists(PATH_IMAGES):
-        makes_directory(PATH_IMAGES)
 
     parser = get_launch_id()
     namespace = parser.parse_args(sys.argv[1:])
@@ -56,11 +51,13 @@ if __name__ == '__main__':
         if response_launches:
             for jpg_url in response_launches.json()[::-1]:
                 if jpg_url["links"]["flickr"]["original"]:
-                    for img_num, img in enumerate(
-                            jpg_url["links"]["flickr"]["original"]):
+                    for image in jpg_url["links"]["flickr"]["original"]:
+                        image_name = returns_file_extension(image)
 
                         saves_image(
-                            PATH_IMAGES, img_num, requests.get(img).content)
+                            PATH_IMAGES, 
+                            image_name, 
+                            requests.get(image).content)
                     break
 
     else:
