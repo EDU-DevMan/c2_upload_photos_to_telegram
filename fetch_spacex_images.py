@@ -4,30 +4,12 @@ from requests.exceptions import HTTPError
 import argparse
 import sys
 from saves_images_directory import saves_image
+from get_checked_path import checked_path
 from urllib.parse import urlparse, unquote
 
 
 PATH_IMAGES = "images"
 URLS_SPACEX = "https://api.spacexdata.com/v5/launches"
-
-
-def get_checked_path(url):
-    try:
-        response = requests.get(url)
-        response.raise_for_status()
-        return response
-
-    except HTTPError as e:
-        if e.response.status_code == 404:
-            print(f"❌ Страница не найдена: {url}")
-            print(f"Ошибка: {e}")
-            return None
-        else:
-            print(f"⚠️ Другая HTTP ошибка: {e}")
-            raise
-    except Exception as e:
-        print(f"🚫 Общая ошибка: {e}")
-        return None
 
 
 def get_launch_id():
@@ -47,11 +29,11 @@ if __name__ == '__main__':
     namespace = parser.parse_args(sys.argv[1:])
 
     if namespace.launch is None:
-        response_launches = get_checked_path(URLS_SPACEX)
+        response_launches = checked_path(URLS_SPACEX)
         if response_launches:
-            for jpg_url in response_launches.json()[::-1]:
-                if jpg_url["links"]["flickr"]["original"]:
-                    for image in jpg_url["links"]["flickr"]["original"]:
+            for image_url in response_launches.json()[::-1]:
+                if image_url["links"]["flickr"]["original"]:
+                    for image in image_url["links"]["flickr"]["original"]:
                         image_name = returns_file_extension(image)
 
                         saves_image(
@@ -61,11 +43,10 @@ if __name__ == '__main__':
                     break
 
     else:
-        namespace_launches = get_checked_path('{}/{}'.format(
+        namespace_launches = checked_path('{}/{}'.format(
             URLS_SPACEX, namespace.launch))
         if namespace_launches:
-            for img_num, img in enumerate(
-                    namespace_launches.json()["links"]["flickr"]["original"]):
-
+            for image in namespace_launches.json()["links"]["flickr"]["original"]:
+                image_name = returns_file_extension(image)
                 saves_image(
-                    PATH_IMAGES, img_num, requests.get(img).content)
+                    PATH_IMAGES, image_name, requests.get(image).content)
