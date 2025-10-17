@@ -8,5 +8,5 @@ if __name__ == '__main__':
 
     bot = telegram.Bot(token=env('TELEGRAM_API'))
 
-    bot.send_message(text="Привет, я photoBOT_NASA!",
-                     chat_id=env('TELEGRAM_CHANNAL'))
+    bot.send_document(chat_id=env('TELEGRAM_CHANNAL'),
+                      document=open('images/hoag_hubble_960.jpg', 'rb'))
