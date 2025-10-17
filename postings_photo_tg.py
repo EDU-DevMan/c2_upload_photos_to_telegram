@@ -8,4 +8,5 @@ if __name__ == '__main__':
 
     bot = telegram.Bot(token=env('TELEGRAM_API'))
 
-    print(bot.get_me())
+    bot.send_message(text="Привет, я photoBOT_NASA!",
+                     chat_id=env('TELEGRAM_CHANNAL'))
