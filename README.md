@@ -10,11 +10,11 @@ web-сайтов nasa и spaceX;
 
 ⚠️ Просьба учитывать следующую информацию:
 
-```Due to the lapse in federal government funding, NASA is not updating this website.
+Due to the lapse in federal government funding, NASA is not updating this website.
 We sincerely regret this inconvenience.
 
 ⚠ Please Note: The Earth API has been archived and replaced with Earthdata GIBS API.
-Please update your bookmarks or projects as needed.```
+Please update your bookmarks or projects as needed.
 
 ## Работать с проектом:
 
