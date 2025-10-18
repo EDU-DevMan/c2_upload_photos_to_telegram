@@ -2,10 +2,10 @@ import requests
 from requests.exceptions import HTTPError
 
 
-def checked_path(url, num_phots='', *api):
+def checked_path(url, number_photos='', *api):
     try:
-        if api and num_phots:
-            payload = {'count': num_phots, 'api_key': api}
+        if api and number_photos:
+            payload = {'count': number_photos, 'api_key': api}
             response = requests.get('{}'.format(url), params=payload)
             response.raise_for_status()
             return response
