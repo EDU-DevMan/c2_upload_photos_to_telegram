@@ -3,5 +3,6 @@ __pycache__
 .venv
 .env
 images/
+images1/
 fetch_nasa_epic_images.py
 upload_wikimedia.py
