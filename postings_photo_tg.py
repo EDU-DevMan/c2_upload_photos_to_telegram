@@ -8,7 +8,7 @@ from environs import Env
 from argument_parsing import get_argument_command_line
 
 
-FREQUENCY_OF_PUBLICATION = 14400
+FREQUENCY_MAXIMUM_PUBLICATION = 14400
 
 
 if __name__ == '__main__':
@@ -27,6 +27,6 @@ if __name__ == '__main__':
                                   document=open(
                                       'images/{}'.format(image), 'rb'))
                 if publication_frequency.launch is None:
-                    time.sleep(FREQUENCY_OF_PUBLICATION)
+                    time.sleep(FREQUENCY_MAXIMUM_PUBLICATION)
                 else:
                     time.sleep(int(publication_frequency.launch))
