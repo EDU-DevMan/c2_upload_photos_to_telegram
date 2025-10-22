@@ -2,10 +2,10 @@ import requests
 from requests.exceptions import HTTPError
 
 
-def get_checked_url(url, number_photos='', *api):
+def get_checked_url(url, number_photos='', *token):
     try:
-        if api and number_photos:
-            payload = {'count': number_photos, 'api_key': api}
+        if token and number_photos:
+            payload = {'count': number_photos, 'nasa_token': token}
             response = requests.get('{}'.format(url), params=payload)
             response.raise_for_status()
             return response
