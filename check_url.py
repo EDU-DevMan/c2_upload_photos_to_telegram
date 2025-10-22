@@ -2,7 +2,7 @@ import requests
 from requests.exceptions import HTTPError
 
 
-def checked_path(url, number_photos='', *api):
+def get_checked_url(url, number_photos='', *api):
     try:
         if api and number_photos:
             payload = {'count': number_photos, 'api_key': api}

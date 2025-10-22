@@ -5,7 +5,7 @@ import time
 import telegram
 
 from environs import Env
-from launch_id_spacex import get_launch_id
+from argument_parsing import get_argument_command_line
 
 
 PUBLICATIONS_ALARM = 14400
@@ -16,7 +16,7 @@ if __name__ == '__main__':
     env.read_env()
 
     bot = telegram.Bot(token=env('TELEGRAM_API'))
-    namespace = get_launch_id().parse_args(sys.argv[1:])
+    namespace = get_argument_command_line().parse_args(sys.argv[1:])
 
     while True:
         for root, dirs, files in os.walk("images/"):
