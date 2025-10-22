@@ -11,9 +11,9 @@ URL_SPACEX = "https://api.spacexdata.com/v5/launches"
 
 if __name__ == '__main__':
 
-    namespace = get_argument_command_line().parse_args(sys.argv[1:])
+    launche_id = get_argument_command_line().parse_args(sys.argv[1:])
 
-    if namespace.launch is None:
+    if launche_id.launch is None:
         response_urls = get_checked_url(URL_SPACEX)
         if response_urls:
             for image_url in response_urls.json()[::-1]:
@@ -28,7 +28,7 @@ if __name__ == '__main__':
 
     else:
         response_urls = get_checked_url('{}/{}'.format(
-            URL_SPACEX, namespace.launch))
+            URL_SPACEX, launche_id.launch))
         if response_urls:
             for image in response_urls.json()["links"]["flickr"]["original"]:
                 saves_image(

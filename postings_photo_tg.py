@@ -8,7 +8,7 @@ from environs import Env
 from argument_parsing import get_argument_command_line
 
 
-PUBLICATIONS_ALARM = 14400
+FREQUENCY_OF_PUBLICATION = 14400
 
 
 if __name__ == '__main__':
@@ -16,7 +16,8 @@ if __name__ == '__main__':
     env.read_env()
 
     bot = telegram.Bot(token=env('TELEGRAM_API'))
-    namespace = get_argument_command_line().parse_args(sys.argv[1:])
+    publication_frequency = get_argument_command_line().parse_args(
+        sys.argv[1:])
 
     while True:
         for root, dirs, files in os.walk("images/"):
@@ -25,7 +26,7 @@ if __name__ == '__main__':
                 bot.send_document(chat_id=env('TELEGRAM_CHANNAL'),
                                   document=open(
                                       'images/{}'.format(image), 'rb'))
-                if namespace.launch is None:
-                    time.sleep(PUBLICATIONS_ALARM)
+                if publication_frequency.launch is None:
+                    time.sleep(FREQUENCY_OF_PUBLICATION)
                 else:
-                    time.sleep(int(namespace.launch))
+                    time.sleep(int(publication_frequency.launch))
