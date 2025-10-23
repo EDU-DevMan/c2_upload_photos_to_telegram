@@ -21,14 +21,14 @@ if __name__ == '__main__':
     checked_url = get_checked_url(NASA_URL, PHOTOS_MAXIMUM_NUMBER, nasa_token)
 
     if checked_url:
-        if photos_number.launch is None:
+        if photos_number.input_argument is None:
             for url in checked_url.json():
                 image_name = returns_file_extension(url["url"])
                 saves_image(
                     IMAGES_PATH, image_name, requests.get(url["url"]).content)
         else:
             for image_url in get_checked_url(NASA_URL,
-                                             int(photos_number.launch),
+                                             int(photos_number.input_argument),
                                              nasa_token).json():
                 image_name = returns_file_extension(image_url["url"])
                 saves_image(

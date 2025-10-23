@@ -13,7 +13,7 @@ if __name__ == '__main__':
 
     launche_id = get_argument_command_line().parse_args(sys.argv[1:])
 
-    if launche_id.launch is None:
+    if launche_id.input_argument is None:
         response_urls = get_checked_url(SPACEX_URL)
         if response_urls:
             for image_url in response_urls.json()[::-1]:
@@ -28,7 +28,7 @@ if __name__ == '__main__':
 
     else:
         response_urls = get_checked_url('{}/{}'.format(
-            SPACEX_URL, launche_id.launch))
+            SPACEX_URL, launche_id.input_argument))
         if response_urls:
             for image in response_urls.json()["links"]["flickr"]["original"]:
                 saves_image(
