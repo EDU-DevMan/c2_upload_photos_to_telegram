@@ -2,17 +2,16 @@ import requests
 from requests.exceptions import HTTPError
 
 
-def get_checked_url(url, number_photos='', *token):
+def get_checked_url(url, photos_number='', *token):
     try:
-        if token and number_photos:
-            payload = {'count': number_photos, 'nasa_token': token}
+        if token and photos_number:
+            payload = {'count': photos_number, 'nasa_token': token}
             response = requests.get('{}'.format(url), params=payload)
-            response.raise_for_status()
-            return response
         else:
             response = requests.get(url)
-            response.raise_for_status()
-            return response
+
+        response.raise_for_status()
+        return response
 
     except HTTPError as e:
         if e.response.status_code == 404:
