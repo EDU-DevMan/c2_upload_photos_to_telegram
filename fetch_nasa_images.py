@@ -18,17 +18,19 @@ if __name__ == '__main__':
     nasa_token = env('NASA_TOKEN_API')
     photos_number = get_argument_command_line().parse_args(sys.argv[1:])
 
-    if get_checked_url(NASA_URL, PHOTOS_MAXIMUM_NUMBER, nasa_token):
+    checked_url = get_checked_url(NASA_URL, PHOTOS_MAXIMUM_NUMBER, nasa_token)
+
+    if checked_url:
         if photos_number.launch is None:
-            for url in get_checked_url(NASA_URL, PHOTOS_MAXIMUM_NUMBER,
-                                       nasa_token).json():
-                img_name = returns_file_extension(url["url"])
+            for url in checked_url.json():
+                image_name = returns_file_extension(url["url"])
                 saves_image(
-                    IMAGES_PATH, img_name, requests.get(url["url"]).content)
+                    IMAGES_PATH, image_name, requests.get(url["url"]).content)
         else:
-            for url in get_checked_url(NASA_URL,
-                                       int(photos_number.launch),
-                                       nasa_token).json():
-                img_name = returns_file_extension(url["url"])
+            for image_url in get_checked_url(NASA_URL,
+                                             int(photos_number.launch),
+                                             nasa_token).json():
+                image_name = returns_file_extension(image_url["url"])
                 saves_image(
-                    IMAGES_PATH, img_name, requests.get(url["url"]).content)
+                    IMAGES_PATH, image_name, requests.get(
+                        image_url["url"]).content)
