@@ -14,7 +14,7 @@ if __name__ == '__main__':
     env = Env()
     env.read_env()
 
-    nasa_token = env('NASA_TOKEN_API')
+    nasa_token = env('NASA_TOKEN')
     photos_number = get_input_argument().parse_args()
 
     checked_url = get_checked_url(NASA_URL, PHOTOS_MAXIMUM_NUMBER, nasa_token)

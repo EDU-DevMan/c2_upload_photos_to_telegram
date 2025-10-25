@@ -14,7 +14,7 @@ if __name__ == '__main__':
     env = Env()
     env.read_env()
 
-    bot = telegram.Bot(token=env('TELEGRAM_API'))
+    bot = telegram.Bot(token=env('TELEGRAM_TOKEN'))
     publication_frequency = get_input_argument().parse_args()
 
     while True:
