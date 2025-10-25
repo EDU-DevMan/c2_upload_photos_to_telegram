@@ -1,7 +1,7 @@
 import argparse
 
 
-def get_argument_command_line():
+def get_input_argument():
     parser = argparse.ArgumentParser()
     parser.add_argument('input_argument', nargs='?')
 

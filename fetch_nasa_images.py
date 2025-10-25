@@ -4,7 +4,7 @@ from environs import Env
 from saves_images_directory import saves_image
 from check_url import get_checked_url
 from get_image_name import returns_file_extension
-from argument_parsing import get_argument_command_line
+from argument_parsing import get_input_argument
 
 IMAGES_PATH = "images"
 NASA_URL = "https://api.nasa.gov/planetary/apod"
@@ -16,7 +16,7 @@ if __name__ == '__main__':
     env.read_env()
 
     nasa_token = env('NASA_TOKEN_API')
-    photos_number = get_argument_command_line().parse_args(sys.argv[1:])
+    photos_number = get_input_argument().parse_args(sys.argv[1:])
 
     checked_url = get_checked_url(NASA_URL, PHOTOS_MAXIMUM_NUMBER, nasa_token)
 

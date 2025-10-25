@@ -3,7 +3,7 @@ import sys
 from saves_images_directory import saves_image
 from check_url import get_checked_url
 from get_image_name import returns_file_extension
-from argument_parsing import get_argument_command_line
+from argument_parsing import get_input_argument
 
 IMAGES_PATH = "images"
 SPACEX_URL = "https://api.spacexdata.com/v5/launches"
@@ -11,7 +11,7 @@ SPACEX_URL = "https://api.spacexdata.com/v5/launches"
 
 if __name__ == '__main__':
 
-    launche_id = get_argument_command_line().parse_args(sys.argv[1:])
+    launche_id = get_input_argument().parse_args(sys.argv[1:])
 
     if launche_id.input_argument is None:
         response_urls = get_checked_url(SPACEX_URL)
