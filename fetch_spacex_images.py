@@ -4,7 +4,7 @@ from check_url import get_checked_url
 from fetch_image_name import get_file_extension
 from argument_parsing import get_input_argument
 
-IMAGES_PATH = "images2"
+IMAGES_PATH = "images"
 SPACEX_URL = "https://api.spacexdata.com/v5/launches"
 
 
