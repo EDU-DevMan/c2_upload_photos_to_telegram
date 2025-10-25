@@ -1,17 +1,16 @@
 import requests
-import sys
 from saves_images_directory import saves_image
 from check_url import get_checked_url
 from fetch_image_name import get_file_extension
 from argument_parsing import get_input_argument
 
-IMAGES_PATH = "images"
+IMAGES_PATH = "images2"
 SPACEX_URL = "https://api.spacexdata.com/v5/launches"
 
 
 if __name__ == '__main__':
 
-    launche_id = get_input_argument().parse_args(sys.argv[1:])
+    launche_id = get_input_argument().parse_args()
 
     if launche_id.input_argument is None:
         response_urls = get_checked_url(SPACEX_URL)

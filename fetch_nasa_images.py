@@ -1,5 +1,4 @@
 import requests
-import sys
 from environs import Env
 from saves_images_directory import saves_image
 from check_url import get_checked_url
@@ -16,7 +15,7 @@ if __name__ == '__main__':
     env.read_env()
 
     nasa_token = env('NASA_TOKEN_API')
-    photos_number = get_input_argument().parse_args(sys.argv[1:])
+    photos_number = get_input_argument().parse_args()
 
     checked_url = get_checked_url(NASA_URL, PHOTOS_MAXIMUM_NUMBER, nasa_token)
 

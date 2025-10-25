@@ -1,5 +1,4 @@
 import os
-import sys
 import random
 import time
 import telegram
@@ -16,7 +15,7 @@ if __name__ == '__main__':
     env.read_env()
 
     bot = telegram.Bot(token=env('TELEGRAM_API'))
-    publication_frequency = get_input_argument().parse_args(sys.argv[1:])
+    publication_frequency = get_input_argument().parse_args()
 
     while True:
         for root, dirs, files in os.walk("images/"):
