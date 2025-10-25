@@ -2,7 +2,7 @@ import requests
 import sys
 from saves_images_directory import saves_image
 from check_url import get_checked_url
-from get_image_name import returns_file_extension
+from fetch_image_name import get_file_extension
 from argument_parsing import get_input_argument
 
 IMAGES_PATH = "images"
@@ -22,7 +22,7 @@ if __name__ == '__main__':
                     for image in original_image_url:
                         saves_image(
                             IMAGES_PATH,
-                            returns_file_extension(image),
+                            get_file_extension(image),
                             requests.get(image).content)
                     break
 
@@ -33,5 +33,5 @@ if __name__ == '__main__':
             for image in response_urls.json()["links"]["flickr"]["original"]:
                 saves_image(
                     IMAGES_PATH,
-                    returns_file_extension(image),
+                    get_file_extension(image),
                     requests.get(image).content)
