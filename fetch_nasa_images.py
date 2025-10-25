@@ -7,7 +7,7 @@ from argument_parsing import get_input_argument
 
 IMAGES_PATH = "images"
 NASA_URL = "https://api.nasa.gov/planetary/apod"
-PHOTOS_MAXIMUM_NUMBER = 40
+PHOTOS_MAXIMUM_NUMBER = 5
 
 
 if __name__ == '__main__':
