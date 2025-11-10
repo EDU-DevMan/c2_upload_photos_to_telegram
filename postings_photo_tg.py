@@ -4,7 +4,7 @@ import time
 import telegram
 
 from environs import Env
-from argument_parsing import get_input_argument
+from spacex_argument_parsing import get_input_argument
 
 
 FREQUENCY_MAXIMUM_PUBLICATION = 14400
