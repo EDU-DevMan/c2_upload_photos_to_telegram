@@ -22,6 +22,5 @@ if __name__ == '__main__':
         for image_url in get_checked_url(NASA_URL,
                                          int(image.nums_image),
                                          nasa_token).json():
-            image_name = get_file_extension(image_url["url"])
-            saves_image(IMAGES_PATH, image_name,
+            saves_image(IMAGES_PATH, get_file_extension(image_url["url"]),
                         requests.get(image_url["url"]).content)
