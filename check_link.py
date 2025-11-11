@@ -25,6 +25,6 @@ def checks_image_link(url, photos_number='', *token):
         else:
             print(f"⚠️ Другая HTTP ошибка: {e}")
             raise
-    except Exception as e:
-        print(f"🚫 Общая ошибка: {e}")
+    except requests.exceptions.InvalidSchema as e:
+        print(f"🚫Error connecting to {url}: {e}")
         return None
