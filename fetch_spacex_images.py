@@ -14,10 +14,10 @@ if __name__ == '__main__':
 
     launch_id = get_launch_id().parse_args()
     checked_link = checks_image_link('{}/{}'.format(SPACEX_URL,
-                                                    launch_id.launch))
+                                                    launch_id.launche))
 
     if checked_link:
-        if launch_id:
+        if launch_id.launche:
             for link_img in checked_link.json()["links"]["flickr"]["original"]:
                 with open('{}/{}'.format(IMAGES_PATH,
                                          get_file_extension(
@@ -25,12 +25,12 @@ if __name__ == '__main__':
                     file.write(requests.get(link_img).content)
 
         else:
-            for original_link_img in checked_link.json()[::-1]:
-                original_image_url = original_link_img["links"]["flickr"]["original"]
-                if original_image_url:
-                    for image in original_image_url:
+            for last_link_img in checked_link.json()[::-1]:
+                last_link = last_link_img["links"]["flickr"]["original"]
+                if last_link:
+                    for link_img in last_link:
                         with open('{}/{}'.format(IMAGES_PATH,
                                                  get_file_extension(
-                                                     image)), 'wb') as file:
-                            file.write(requests.get(image).content)
+                                                     link_img)), 'wb') as file:
+                            file.write(requests.get(link_img).content)
                     break
