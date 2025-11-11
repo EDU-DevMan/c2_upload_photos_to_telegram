@@ -9,7 +9,7 @@ def get_launch_id():
                         fetch_spacex_images.py 61e048ffbe8d8b66799018d1 ,
                         где 61e048ffbe8d8b66799018d1 - id запуска.
                         Скрипты можно запускать без аргумента.
-                        Подробно читать в README.
+                        Подробности читать в README.
                         """)
 
     return parser

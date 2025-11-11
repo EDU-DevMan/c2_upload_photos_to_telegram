@@ -10,7 +10,7 @@ def get_frequency_max_publication():
                         пример: postings_photo_tg.py 60 - скрипт будет
                         публиковать изображение каждую минуту.
                         Скрипт можно запускать без аргумента.
-                        Подробно читать в README.
+                        Подробности читать в README.
                         """)
 
     return parser
