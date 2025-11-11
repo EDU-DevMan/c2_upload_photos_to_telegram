@@ -1,9 +1,9 @@
 import argparse
 
 
-def get_nums_image():
+def get_number_images():
     parser = argparse.ArgumentParser()
-    parser.add_argument('nums_image', nargs='?', default=5,
+    parser.add_argument('nums', nargs='?', default=5,
                         help="""Скрипт fetch_nasa_images.py на вход может
                         принять один аргумент - число, пример:
                         fetch_nasa_images.py 50 ,
