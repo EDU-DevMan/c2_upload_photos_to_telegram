@@ -1,7 +1,7 @@
 import os
 import requests
 from site_responses import receives_response_site
-from fetch_image_name import get_file_extension
+from fetch_file_name import exctracts_filename
 from spacex_argument_parsing import get_launch_id
 
 IMAGES_PATH = "images"
@@ -20,7 +20,7 @@ if __name__ == '__main__':
         if launch_id.launche:
             for link_img in checked_link.json()["links"]["flickr"]["original"]:
                 with open('{}/{}'.format(IMAGES_PATH,
-                                         get_file_extension(
+                                         exctracts_filename(
                                              link_img)), 'wb') as file:
                     file.write(requests.get(link_img).content)
 
@@ -30,7 +30,7 @@ if __name__ == '__main__':
                 if last_link:
                     for link_img in last_link:
                         with open('{}/{}'.format(IMAGES_PATH,
-                                                 get_file_extension(
+                                                 exctracts_filename(
                                                      link_img)), 'wb') as file:
                             file.write(requests.get(link_img).content)
                     break
