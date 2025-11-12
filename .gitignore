@@ -6,3 +6,6 @@ images/
 images1/
 fetch_nasa_epic_images.py
 upload_wikimedia.py
+spacex_argument_parsing.py
+nasa_argument_parsing.py
+telegram_argument_parsing.py

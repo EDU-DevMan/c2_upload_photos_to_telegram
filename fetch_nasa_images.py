@@ -1,31 +1,53 @@
 import os
 import requests
+import argparse
 from environs import Env
 from site_responses import receives_response_site
 from fetch_file_name import exctracts_filename_extension
-from nasa_argument_parsing import get_number_images
 
 IMAGES_PATH = "images"
 NASA_URL = "https://api.nasa.gov/planetary/apod"
 
 
-if __name__ == '__main__':
+def get_number_images():
+    parser = argparse.ArgumentParser(prog='NASA argument parsing',
+                                     description="""Программа возвращает
+                                     один аргумент* командной строки в скрипт
+                                     fetch_nasa_images.py .
+                                     *Аргумент - число изображений, которые
+                                     можно сохранить.
+                                     Подробности работы читайте в README""",
+                                     epilog='____________________________')
+    parser.add_argument('number', nargs='?', default=5,
+                        help="""Пример запуска:
+                        fetch_nasa_images.py 50 ,
+                        будут сохранены 50 изображений.
+                        Скрип без аргумента сохранит 5 изображений.
+                        """)
+
+    return parser
+
+
+def main():
     env = Env()
     env.read_env()
 
+    nasa_token = env('NASA_TOKEN')
+    checked_link = receives_response_site(
+        NASA_URL,
+        int(get_number_images().parse_args().number),
+        nasa_token
+        )
+
     os.makedirs(IMAGES_PATH, exist_ok=True)
 
-    nasa_token = env('NASA_TOKEN')
-    image_numbers = get_number_images().parse_args()
-
-    checked_link = receives_response_site(NASA_URL, image_numbers.nums,
-                                          nasa_token)
-
     if checked_link:
-        for link_img in receives_response_site(NASA_URL,
-                                               int(image_numbers.nums),
-                                               nasa_token).json():
+        for link_img in checked_link:
             with open('{}/{}'.format(IMAGES_PATH,
                                      exctracts_filename_extension(
                                          link_img["url"])), 'wb') as file:
                 file.write(requests.get(link_img["url"]).conten)
+
+
+if __name__ == '__main__':
+    main()
