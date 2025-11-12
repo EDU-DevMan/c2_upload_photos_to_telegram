@@ -9,9 +9,8 @@ from environs import Env
 IMAGES_PATH = "images"
 
 
-def get_frequency_max_publication():
-    parser = argparse.ArgumentParser(prog='Telegram argument parsing',
-                                     description="""Программа возвращает
+def returns_time_publication():
+    parser = argparse.ArgumentParser(description="""Программа возвращает
                                      один аргумент* командной строки в скрипт
                                      postings_photo_tg.py .
                                      *Аргумент - число(время в секундах),
@@ -20,7 +19,7 @@ def get_frequency_max_publication():
                                      telegram канале.
                                      Подробности работы читайте в README""",
                                      epilog='____________________________')
-    parser.add_argument('frequency', nargs='?', default=10,
+    parser.add_argument('time', nargs='?', default=10, type=int,
                         help="""Пример запуска:
                         postings_photo_tg.py 60 .
                         Новое изображение будет публиковаться
@@ -46,7 +45,7 @@ def main():
             for image in images:
                 with open('{}/{}'.format(IMAGES_PATH, image), 'rb') as image:
                     bot.send_document(chat_id, image)
-                time.sleep(int(get_frequency_max_publication().parse_args().frequency))
+                time.sleep(returns_time_publication().parse_args().time)
 
 
 if __name__ == '__main__':
