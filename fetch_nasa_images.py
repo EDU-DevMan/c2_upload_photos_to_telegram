@@ -2,7 +2,7 @@ import os
 import requests
 from environs import Env
 from site_responses import receives_response_site
-from fetch_file_name import exctracts_filename
+from fetch_file_name import exctracts_filename_extension
 from nasa_argument_parsing import get_number_images
 
 IMAGES_PATH = "images"
@@ -26,6 +26,6 @@ if __name__ == '__main__':
                                                int(image_numbers.nums),
                                                nasa_token).json():
             with open('{}/{}'.format(IMAGES_PATH,
-                                     exctracts_filename(
+                                     exctracts_filename_extension(
                                          link_img["url"])), 'wb') as file:
                 file.write(requests.get(link_img["url"]).conten)
