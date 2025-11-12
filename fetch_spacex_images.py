@@ -16,7 +16,7 @@ def returns_launch_id():
                                      будут выбраны изображения для сохранения.
                                      Подробности работы читайте в README""",
                                      epilog='____________________________')
-    parser.add_argument('launche_id', nargs='?', default='',
+    parser.add_argument('launch_id', nargs='?', default='',
                         help="""Пример запуска:
                         fetch_spacex_images.py 61e048ffbe8d8b66799018d1 ,
                         Скрипт можно запускать без аргумента - будут сохранены
@@ -29,13 +29,13 @@ def returns_launch_id():
 def main():
 
     site_response = receives_response_site(
-        '{}/{}'.format(SPACEX_URL, returns_launch_id().parse_args().launche_id)
+        '{}/{}'.format(SPACEX_URL, returns_launch_id().parse_args().launch_id)
         )
 
     os.makedirs(IMAGES_PATH, exist_ok=True)
 
     if site_response:
-        if returns_launch_id().parse_args().launche_id:
+        if returns_launch_id().parse_args().launch_id:
             for link_img in site_response.json()["links"]["flickr"]["original"]:
                 with open('{}/{}'.format(IMAGES_PATH,
                                          exctracts_filename_extension(

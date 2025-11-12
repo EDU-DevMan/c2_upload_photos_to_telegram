@@ -45,7 +45,7 @@ def main():
             with open('{}/{}'.format(IMAGES_PATH,
                                      exctracts_filename_extension(
                                          link_img["url"])), 'wb') as file:
-                file.write(requests.get(link_img["url"]).conten)
+                file.write(requests.get(link_img["url"]).content)
 
 
 if __name__ == '__main__':
