@@ -1,6 +1,6 @@
 import os
 import requests
-from check_link import checks_image_link
+from site_responses import receives_response_site
 from fetch_image_name import get_file_extension
 from spacex_argument_parsing import get_launch_id
 
@@ -13,8 +13,8 @@ if __name__ == '__main__':
     os.makedirs(IMAGES_PATH, exist_ok=True)
 
     launch_id = get_launch_id().parse_args()
-    checked_link = checks_image_link('{}/{}'.format(SPACEX_URL,
-                                                    launch_id.launche))
+    checked_link = receives_response_site('{}/{}'.format(SPACEX_URL,
+                                                         launch_id.launche))
 
     if checked_link:
         if launch_id.launche:

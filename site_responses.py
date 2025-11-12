@@ -2,7 +2,7 @@ import requests
 from requests.exceptions import HTTPError
 
 
-def checks_image_link(url, photos_number='', *token):
+def receives_response_site(url, photos_number='', *token):
     try:
         if token and photos_number:
             payload = {'count': photos_number, 'nasa_token': token}
