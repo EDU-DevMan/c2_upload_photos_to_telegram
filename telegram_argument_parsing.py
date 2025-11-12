@@ -2,15 +2,24 @@ import argparse
 
 
 def get_frequency_max_publication():
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(prog='Telegram argument parsing',
+                                     description="""Программа возвращает
+                                     один аргумент* командной строки в скрипт
+                                     postings_photo_tg.py .
+                                     *Аргумент - число(время в секундах),
+                                     указывает с какой периодичностью будет
+                                     публиковаться изображение в вашем
+                                     telegram канале.
+                                     Подробности работы читайте в README""",
+                                     epilog='____________________________')
     parser.add_argument('frequency', nargs='?', default=10,
-                        help="""Скрипт postings_photo_tg.py на вход может
-                        принять один аргумент - число (значение измеряется
-                        в секундах),
-                        пример: postings_photo_tg.py 60 - скрипт будет
-                        публиковать изображение каждую минуту.
-                        Скрипт можно запускать без аргумента.
-                        Подробности читать в README.
+                        help="""Пример запуска:
+                        postings_photo_tg.py 60 .
+                        Новое изображение будет публиковаться
+                        один раз в минуту.
+                        Скрипт можно запускать без аргумента -
+                        новое изображение будет публиковаться
+                        один раз в 4 часа.
                         """)
 
     return parser
