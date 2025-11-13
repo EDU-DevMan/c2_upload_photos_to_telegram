@@ -28,20 +28,19 @@ def returns_launch_id():
 
 def main():
 
+    os.makedirs(IMAGES_PATH, exist_ok=True)
     site_response = receives_response_site(
         '{}/{}'.format(SPACEX_URL, returns_launch_id().parse_args().launch_id)
-        )
+    )
 
-    os.makedirs(IMAGES_PATH, exist_ok=True)
-
-    if site_response:
+    try:
         if returns_launch_id().parse_args().launch_id:
             for link_img in site_response.json()["links"]["flickr"]["original"]:
+                os.makedirs(IMAGES_PATH, exist_ok=True)
                 with open('{}/{}'.format(IMAGES_PATH,
                                          exctracts_filename_extension(
                                              link_img)), 'wb') as file:
                     file.write(requests.get(link_img).content)
-
         else:
             for last_link_img in site_response.json()[::-1]:
                 last_link = last_link_img["links"]["flickr"]["original"]
@@ -52,6 +51,9 @@ def main():
                                                      link_img)), 'wb') as file:
                             file.write(requests.get(link_img).content)
                     break
+
+    except AttributeError:
+        pass
 
 
 if __name__ == '__main__':

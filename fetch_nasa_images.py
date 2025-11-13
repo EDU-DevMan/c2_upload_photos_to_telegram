@@ -32,20 +32,23 @@ def main():
     env.read_env()
 
     nasa_token = env('NASA_TOKEN')
+
+    os.makedirs(IMAGES_PATH, exist_ok=True)
     site_response = receives_response_site(
         NASA_URL,
         returns_number_images().parse_args().number,
         nasa_token
         )
 
-    os.makedirs(IMAGES_PATH, exist_ok=True)
-
-    if site_response:
+    try:
         for link_img in site_response:
             with open('{}/{}'.format(IMAGES_PATH,
                                      exctracts_filename_extension(
                                          link_img["url"])), 'wb') as file:
                 file.write(requests.get(link_img["url"]).content)
+
+    except AttributeError:
+        pass
 
 
 if __name__ == '__main__':
