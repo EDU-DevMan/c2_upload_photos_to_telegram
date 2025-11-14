@@ -31,25 +31,25 @@ def main():
     os.makedirs(IMAGES_PATH, exist_ok=True)
     site_response = receives_response_site(
         '{}/{}'.format(SPACEX_URL, returns_launch_id().parse_args().launch_id)
-    )
+        )
 
     try:
+        response_json = site_response.json()
         if returns_launch_id().parse_args().launch_id:
-            for link_img in site_response.json()["links"]["flickr"]["original"]:
-                os.makedirs(IMAGES_PATH, exist_ok=True)
+            for link_image in response_json["links"]["flickr"]["original"]:
+                filename = exctracts_filename_extension(link_image)
                 with open('{}/{}'.format(IMAGES_PATH,
-                                         exctracts_filename_extension(
-                                             link_img)), 'wb') as file:
-                    file.write(requests.get(link_img).content)
+                                         filename), 'wb') as file:
+                    file.write(requests.get(link_image).content)
         else:
-            for last_link_img in site_response.json()[::-1]:
-                last_link = last_link_img["links"]["flickr"]["original"]
+            for last_link_image in response_json[::-1]:
+                last_link = last_link_image["links"]["flickr"]["original"]
                 if last_link:
-                    for link_img in last_link:
+                    for link_image in last_link:
+                        filename = exctracts_filename_extension(link_image)
                         with open('{}/{}'.format(IMAGES_PATH,
-                                                 exctracts_filename_extension(
-                                                     link_img)), 'wb') as file:
-                            file.write(requests.get(link_img).content)
+                                                 filename), 'wb') as file:
+                            file.write(requests.get(link_image).content)
                     break
 
     except AttributeError:

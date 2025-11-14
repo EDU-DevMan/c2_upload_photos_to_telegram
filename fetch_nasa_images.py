@@ -37,14 +37,12 @@ def main():
     site_response = receives_response_site(
         NASA_URL,
         returns_number_images().parse_args().number,
-        nasa_token
-        )
+        nasa_token)
 
     try:
         for link_img in site_response:
-            with open('{}/{}'.format(IMAGES_PATH,
-                                     exctracts_filename_extension(
-                                         link_img["url"])), 'wb') as file:
+            filename = exctracts_filename_extension(link_img["url"])
+            with open('{}/{}'.format(IMAGES_PATH, filename), 'wb') as file:
                 file.write(requests.get(link_img["url"]).content)
 
     except AttributeError:
