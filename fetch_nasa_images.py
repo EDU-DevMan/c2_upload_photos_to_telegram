@@ -9,7 +9,7 @@ IMAGES_PATH = "images"
 NASA_URL = "https://api.nasa.gov/planetary/apod"
 
 
-def returns_number_images():
+def returns_number():
     parser = argparse.ArgumentParser(description="""Программа возвращает
                                      один аргумент* командной строки в скрипт
                                      fetch_nasa_images.py .
@@ -36,7 +36,7 @@ def main():
     os.makedirs(IMAGES_PATH, exist_ok=True)
     site_response = receives_response_site(
         NASA_URL,
-        returns_number_images().parse_args().number,
+        returns_number().parse_args().number,
         nasa_token)
 
     try:

@@ -9,7 +9,7 @@ from environs import Env
 IMAGES_PATH = "images"
 
 
-def returns_time_publication():
+def returns_number():
     parser = argparse.ArgumentParser(description="""Программа возвращает
                                      один аргумент* командной строки в скрипт
                                      postings_photo_tg.py .
@@ -45,7 +45,7 @@ def main():
             for image in images:
                 with open('{}/{}'.format(IMAGES_PATH, image), 'rb') as image:
                     bot.send_document(chat_id, image)
-                time.sleep(returns_time_publication().parse_args().time)
+                time.sleep(returns_number().parse_args().time)
 
 
 if __name__ == '__main__':

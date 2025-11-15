@@ -8,7 +8,7 @@ IMAGES_PATH = "images"
 SPACEX_URL = "https://api.spacexdata.com/v5/launches"
 
 
-def returns_launch_id():
+def returns_id():
     parser = argparse.ArgumentParser(description="""Программа возвращает
                                      один аргумент* командной строки в скрипт
                                      fetch_spacex_images.py .
@@ -30,12 +30,12 @@ def main():
 
     os.makedirs(IMAGES_PATH, exist_ok=True)
     site_response = receives_response_site(
-        '{}/{}'.format(SPACEX_URL, returns_launch_id().parse_args().launch_id)
+        '{}/{}'.format(SPACEX_URL, returns_id().parse_args().launch_id)
         )
 
     try:
         response_json = site_response.json()
-        if returns_launch_id().parse_args().launch_id:
+        if returns_id().parse_args().launch_id:
             for link_image in response_json["links"]["flickr"]["original"]:
                 filename = exctracts_filename_extension(link_image)
                 with open('{}/{}'.format(IMAGES_PATH,
