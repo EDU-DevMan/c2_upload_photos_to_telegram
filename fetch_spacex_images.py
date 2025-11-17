@@ -16,7 +16,7 @@ def returns_id():
                                      будут выбраны изображения для сохранения.
                                      Подробности работы читайте в README""",
                                      epilog='____________________________')
-    parser.add_argument('launch_id', nargs='?', default='',
+    parser.add_argument('id', nargs='?', default='',
                         help="""Пример запуска:
                         fetch_spacex_images.py 61e048ffbe8d8b66799018d1 ,
                         Скрипт можно запускать без аргумента - будут сохранены
@@ -30,7 +30,7 @@ def main():
 
     os.makedirs(IMAGES_PATH, exist_ok=True)
     site_response = receives_response_site(
-        '{}/{}'.format(SPACEX_URL, returns_id().parse_args().launch_id)
+        '{}/{}'.format(SPACEX_URL, returns_id().parse_args().id)
         )
 
     try:

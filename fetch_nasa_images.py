@@ -9,7 +9,7 @@ IMAGES_PATH = "images"
 NASA_URL = "https://api.nasa.gov/planetary/apod"
 
 
-def returns_number():
+def returns_int():
     parser = argparse.ArgumentParser(description="""Программа возвращает
                                      один аргумент* командной строки в скрипт
                                      fetch_nasa_images.py .
@@ -17,7 +17,7 @@ def returns_number():
                                      можно сохранить.
                                      Подробности работы читайте в README""",
                                      epilog='____________________________')
-    parser.add_argument('number', nargs='?', default=5, type=int,
+    parser.add_argument('int', nargs='?', default=5, type=int,
                         help="""Пример запуска:
                         fetch_nasa_images.py 50 ,
                         будут сохранены 50 изображений.
@@ -36,8 +36,9 @@ def main():
     os.makedirs(IMAGES_PATH, exist_ok=True)
     site_response = receives_response_site(
         NASA_URL,
-        returns_number().parse_args().number,
-        nasa_token)
+        returns_int().parse_args().int,
+        nasa_token
+    )
 
     try:
         for link_img in site_response:

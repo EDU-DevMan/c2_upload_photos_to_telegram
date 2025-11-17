@@ -9,7 +9,7 @@ from environs import Env
 IMAGES_PATH = "images"
 
 
-def returns_number():
+def returns_int():
     parser = argparse.ArgumentParser(description="""Программа возвращает
                                      один аргумент* командной строки в скрипт
                                      postings_photo_tg.py .
@@ -19,7 +19,7 @@ def returns_number():
                                      telegram канале.
                                      Подробности работы читайте в README""",
                                      epilog='____________________________')
-    parser.add_argument('time', nargs='?', default=10, type=int,
+    parser.add_argument('int', nargs='?', default=10, type=int,
                         help="""Пример запуска:
                         postings_photo_tg.py 60 .
                         Новое изображение будет публиковаться
@@ -45,7 +45,7 @@ def main():
             for image in images:
                 with open('{}/{}'.format(IMAGES_PATH, image), 'rb') as image:
                     bot.send_document(chat_id, image)
-                time.sleep(returns_number().parse_args().time)
+                time.sleep(returns_int().parse_args().int)
 
 
 if __name__ == '__main__':
