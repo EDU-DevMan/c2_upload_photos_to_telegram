@@ -9,13 +9,12 @@ SPACEX_URL = "https://api.spacexdata.com/v5/launches"
 
 
 def returns_id():
-    parser = argparse.ArgumentParser(description="""Программа возвращает
-                                     один аргумент* командной строки в скрипт
-                                     fetch_spacex_images.py .
-                                     *Аргумент - id запуска , из которого
-                                     будут выбраны изображения для сохранения.
-                                     Подробности работы читайте в README""",
-                                     epilog='____________________________')
+    parser = argparse.ArgumentParser(
+        prog='fetch_spacex_images.py',
+        description="""Программа позволяет сохранить изображения,
+        которые получены с запуска шатла SpaceX.""",
+        epilog='____________________________',
+    )
     parser.add_argument('id', nargs='?', default='',
                         help="""идентификатор запуска, представляет собой
                         буквенно-цифровой набор символов,

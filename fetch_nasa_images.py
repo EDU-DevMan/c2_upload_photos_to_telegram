@@ -10,13 +10,13 @@ NASA_URL = "https://api.nasa.gov/planetary/apod"
 
 
 def returns_int():
-    parser = argparse.ArgumentParser(description="""Программа возвращает
-                                     один аргумент* командной строки в скрипт
-                                     fetch_nasa_images.py .
-                                     *Аргумент - число изображений, которые
-                                     можно сохранить.
-                                     Подробности работы читайте в README""",
-                                     epilog='____________________________')
+    parser = argparse.ArgumentParser(
+        prog='fetch_nasa_images.py',
+        description="""Программа позволяет сохранить изображения космических
+        объектов, изображения из открытого космоса и т.д.,
+        предоставляемые сайтом NASA""",
+        epilog='____________________________',
+    )
     parser.add_argument('int', nargs='?', default=5, type=int,
                         help="""целое число - обозначает количество
                         изображений, которые будут сохранены .

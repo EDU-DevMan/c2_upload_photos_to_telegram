@@ -10,15 +10,12 @@ IMAGES_PATH = "images"
 
 
 def returns_int():
-    parser = argparse.ArgumentParser(description="""Программа возвращает
-                                     один аргумент* командной строки в скрипт
-                                     postings_photo_tg.py .
-                                     *Аргумент - число(время в секундах),
-                                     указывает с какой периодичностью будет
-                                     публиковаться изображение в вашем
-                                     telegram канале.
-                                     Подробности работы читайте в README""",
-                                     epilog='____________________________')
+    parser = argparse.ArgumentParser(
+        prog='postings_photo_tg.py',
+        description="""Программа позволяет публиковать изображения
+        в Telegram канал""",
+        epilog='____________________________',
+    )
     parser.add_argument('int', nargs='?', default=10, type=int,
                         help="""целое число - (время в секундах) - указывает
                         с какой периодичностью будет публиковаться изображение
