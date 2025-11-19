@@ -26,5 +26,5 @@ def receives_response_site(url, photos_number='', *token):
             print(f"⚠️ Другая HTTP ошибка: {e}")
             raise
     except requests.exceptions.InvalidSchema as e:
-        print(f"🚫Error connecting to {url}: {e}")
+        print(f"🚫Ошибка подключения к {url}: {e}")
         return None

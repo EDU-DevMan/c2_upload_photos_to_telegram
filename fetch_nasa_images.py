@@ -45,7 +45,7 @@ def main():
                 file.write(receives_response_site(link_img["url"]).content)
 
     except AttributeError:
-        pass
+        print("URL недоступен!")
 
 
 if __name__ == '__main__':

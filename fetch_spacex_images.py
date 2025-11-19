@@ -54,7 +54,7 @@ def main():
                     break
 
     except AttributeError:
-        pass
+        print("URL недоступен!")
 
 
 if __name__ == '__main__':
