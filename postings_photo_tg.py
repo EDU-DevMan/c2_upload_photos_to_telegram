@@ -16,7 +16,7 @@ def returns_int():
         в Telegram канал""",
         epilog='____________________________',
     )
-    parser.add_argument('int', nargs='?', default=10, type=int,
+    parser.add_argument('int', nargs='?', default=14400, type=int,
                         help="""целое число - (время в секундах) - указывает
                         с какой периодичностью будет публиковаться изображение
                         в вашем telegram канале.
@@ -34,13 +34,14 @@ def main():
 
     bot = telegram.Bot(token=env('TELEGRAM_TOKEN'))
 
-    while True:
-        for root, dirs, images in os.walk(IMAGES_PATH):
-            random.shuffle(images)
-            for image in images:
-                with open('{}/{}'.format(IMAGES_PATH, image), 'rb') as image:
-                    bot.send_document(chat_id, image)
-                time.sleep(returns_int().parse_args().int)
+    if returns_int().parse_args().int:
+        while True:
+            for root, dirs, images in os.walk(IMAGES_PATH):
+                random.shuffle(images)
+                for image in images:
+                    with open(f'{IMAGES_PATH}/{image}', 'rb') as image:
+                        bot.send_document(chat_id, image)
+                    time.sleep(returns_int().parse_args().int)
 
 
 if __name__ == '__main__':
