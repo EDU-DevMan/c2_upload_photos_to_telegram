@@ -39,12 +39,15 @@ def main():
     )
 
     try:
-        for link_img in site_response:
-            with open(
-                f'{IMAGES_PATH}/{exctracts_filename(link_img["url"])}',
-                'wb'
-            ) as file:
-                file.write(receives_response_site(link_img["url"]).content)
+        if returns_int().parse_args().int:
+            for link_img in site_response:
+                with open(
+                    f'{IMAGES_PATH}/{exctracts_filename(link_img["url"])}',
+                    'wb'
+                ) as file:
+                    file.write(
+                        receives_response_site(link_img["url"]).content
+                    )
 
     except TypeError:
         print("URL недоступен!")
