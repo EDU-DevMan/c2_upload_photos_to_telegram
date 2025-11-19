@@ -1,10 +1,10 @@
 import os
 import argparse
 from receiving_responses_site import receives_response_site
-from fetch_file_name import exctracts_filename_extension
+from fetch_file_name import exctracts_filename
 
 IMAGES_PATH = "images"
-SPACEX_URL = "https1://api.spacexdata.com/v5/launches"
+SPACEX_URL = "https://api.spacexdata.com/v5/launches"
 
 
 def returns_id():
@@ -33,21 +33,25 @@ def main():
     )
 
     try:
-        response_json = site_response.json()
         if returns_id().parse_args().id:
-            for link_image in response_json["links"]["flickr"]["original"]:
-                filename = exctracts_filename_extension(link_image)
-                with open('{}/{}'.format(IMAGES_PATH,
-                                         filename), 'wb') as file:
+            for link_image in (
+                    site_response.json()["links"]["flickr"]["original"]
+            ):
+                with open(
+                    f'{IMAGES_PATH}/{exctracts_filename(link_image)}',
+                    'wb'
+                ) as file:
                     file.write(receives_response_site(link_image).content)
         else:
-            for last_link_image in response_json[::-1]:
+            pass
+            for last_link_image in site_response.json()[::-1]:
                 last_link = last_link_image["links"]["flickr"]["original"]
                 if last_link:
                     for link_image in last_link:
-                        filename = exctracts_filename_extension(link_image)
-                        with open('{}/{}'.format(IMAGES_PATH,
-                                                 filename), 'wb') as file:
+                        with open(
+                            f'{IMAGES_PATH}/{exctracts_filename(link_image)}',
+                            'wb'
+                        ) as file:
                             file.write(
                                 receives_response_site(link_image).content
                             )

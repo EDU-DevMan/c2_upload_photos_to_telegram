@@ -19,7 +19,7 @@ def receives_response_site(url, photos_number='', *token):
             print(f"Ошибка: {e}")
             return None
         elif e.response.status_code == 403:
-            print(f"🛑 Доступ запрещен{url}")
+            print(f"🛑 Доступ запрещен {url}")
             print(f"Ошибка: {e}")
             return None
         else:

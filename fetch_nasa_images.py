@@ -2,7 +2,7 @@ import os
 import argparse
 from environs import Env
 from receiving_responses_site import receives_response_site
-from fetch_file_name import exctracts_filename_extension
+from fetch_file_name import exctracts_filename
 
 IMAGES_PATH = "images"
 NASA_URL = "https://api.nasa.gov/planetary/apod"
@@ -40,11 +40,13 @@ def main():
 
     try:
         for link_img in site_response:
-            filename = exctracts_filename_extension(link_img["url"])
-            with open('{}/{}'.format(IMAGES_PATH, filename), 'wb') as file:
+            with open(
+                f'{IMAGES_PATH}/{exctracts_filename(link_img["url"])}',
+                'wb'
+            ) as file:
                 file.write(receives_response_site(link_img["url"]).content)
 
-    except AttributeError:
+    except TypeError:
         print("URL недоступен!")
 
 
