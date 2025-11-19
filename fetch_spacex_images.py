@@ -1,11 +1,10 @@
 import os
-import requests
 import argparse
 from receiving_responses_site import receives_response_site
 from fetch_file_name import exctracts_filename_extension
 
 IMAGES_PATH = "images"
-SPACEX_URL = "https://api.spacexdata.com/v5/launches"
+SPACEX_URL = "https1://api.spacexdata.com/v5/launches"
 
 
 def returns_id():
@@ -31,16 +30,16 @@ def main():
     os.makedirs(IMAGES_PATH, exist_ok=True)
     site_response = receives_response_site(
         '{}/{}'.format(SPACEX_URL, returns_id().parse_args().id)
-        )
+    )
 
     try:
         response_json = site_response.json()
-        if returns_id().parse_args().launch_id:
+        if returns_id().parse_args().id:
             for link_image in response_json["links"]["flickr"]["original"]:
                 filename = exctracts_filename_extension(link_image)
                 with open('{}/{}'.format(IMAGES_PATH,
                                          filename), 'wb') as file:
-                    file.write(requests.get(link_image).content)
+                    file.write(receives_response_site(link_image).content)
         else:
             for last_link_image in response_json[::-1]:
                 last_link = last_link_image["links"]["flickr"]["original"]
@@ -49,7 +48,9 @@ def main():
                         filename = exctracts_filename_extension(link_image)
                         with open('{}/{}'.format(IMAGES_PATH,
                                                  filename), 'wb') as file:
-                            file.write(requests.get(link_image).content)
+                            file.write(
+                                receives_response_site(link_image).content
+                            )
                     break
 
     except AttributeError:

@@ -1,5 +1,4 @@
 import os
-import requests
 import argparse
 from environs import Env
 from receiving_responses_site import receives_response_site
@@ -43,7 +42,7 @@ def main():
         for link_img in site_response:
             filename = exctracts_filename_extension(link_img["url"])
             with open('{}/{}'.format(IMAGES_PATH, filename), 'wb') as file:
-                file.write(requests.get(link_img["url"]).content)
+                file.write(receives_response_site(link_img["url"]).content)
 
     except AttributeError:
         pass
