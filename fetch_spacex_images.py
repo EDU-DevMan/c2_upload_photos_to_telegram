@@ -14,7 +14,7 @@ def returns_id():
         которые получены с запуска шатла SpaceX.""",
         epilog='____________________________',
     )
-    parser.add_argument('id', nargs='?', default='',
+    parser.add_argument('id', nargs='?', default='6243adcaaf52800c6e919254',
                         help="""идентификатор запуска, представляет собой
                         буквенно-цифровой набор символов,
                         пример: 61e048ffbe8d8b66799018d1 .
@@ -33,32 +33,17 @@ def main():
     )
 
     try:
-        if returns_id().parse_args().id:
-            for link_image in (
-                    site_response.json()["links"]["flickr"]["original"]
-            ):
+        image_links = site_response.json()["links"]["flickr"]["original"]
+        if image_links:
+            for image_link in image_links:
                 with open(
-                    f'{IMAGES_PATH}/{exctracts_filename(link_image)}',
+                    f'{IMAGES_PATH}/{exctracts_filename(image_link)}',
                     'wb'
                 ) as file:
-                    file.write(receives_response_site(link_image).content)
-        else:
-            pass
-            for last_link_image in site_response.json()[::-1]:
-                last_link = last_link_image["links"]["flickr"]["original"]
-                if last_link:
-                    for link_image in last_link:
-                        with open(
-                            f'{IMAGES_PATH}/{exctracts_filename(link_image)}',
-                            'wb'
-                        ) as file:
-                            file.write(
-                                receives_response_site(link_image).content
-                            )
-                    break
+                    file.write(receives_response_site(image_link).content)
 
-    except AttributeError:
-        print("URL недоступен!")
+    except AttributeError as e:
+        print(f"Невозможно получить атрибут: {e}")
 
 
 if __name__ == '__main__':
