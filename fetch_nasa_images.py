@@ -8,7 +8,7 @@ IMAGES_PATH = "images"
 NASA_URL = "https1://api.nasa.gov/planetary/apod"
 
 
-def returns_int():
+def returns_an_integer():
     parser = argparse.ArgumentParser(
         prog='fetch_nasa_images.py',
         description="""Программа позволяет сохранить изображения космических
@@ -34,7 +34,7 @@ def main():
     os.makedirs(IMAGES_PATH, exist_ok=True)
     site_response = receives_response_site(
         NASA_URL,
-        returns_int().parse_args().int,
+        returns_an_integer().parse_args().int,
         nasa_token
     )
 

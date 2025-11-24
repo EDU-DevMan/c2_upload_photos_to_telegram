@@ -7,7 +7,7 @@ IMAGES_PATH = "images"
 SPACEX_URL = "https://api.spacexdata.com/v5/launches"
 
 
-def returns_id():
+def returns_launch_id():
     parser = argparse.ArgumentParser(
         prog='fetch_spacex_images.py',
         description="""Программа позволяет сохранить изображения,
@@ -29,7 +29,7 @@ def main():
 
     os.makedirs(IMAGES_PATH, exist_ok=True)
     site_response = receives_response_site(
-        '{}/{}'.format(SPACEX_URL, returns_id().parse_args().id)
+        '{}/{}'.format(SPACEX_URL, returns_launch_id().parse_args().id)
     )
 
     try:

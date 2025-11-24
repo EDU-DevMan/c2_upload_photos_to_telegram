@@ -9,7 +9,7 @@ from environs import Env
 IMAGES_PATH = "images"
 
 
-def returns_int():
+def returns_an_integer():
     parser = argparse.ArgumentParser(
         prog='postings_photo_tg.py',
         description="""Программа позволяет публиковать изображения
@@ -34,14 +34,14 @@ def main():
 
     bot = telegram.Bot(token=env('TELEGRAM_TOKEN'))
 
-    if returns_int().parse_args().int:
+    if returns_an_integer().parse_args().int:
         while True:
             for root, dirs, images in os.walk(IMAGES_PATH):
                 random.shuffle(images)
                 for image in images:
                     with open(f'{IMAGES_PATH}/{image}', 'rb') as image:
                         bot.send_document(chat_id, image)
-                    time.sleep(returns_int().parse_args().int)
+                    time.sleep(returns_an_integer().parse_args().int)
 
 
 if __name__ == '__main__':
