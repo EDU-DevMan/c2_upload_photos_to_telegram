@@ -34,13 +34,13 @@ def main():
 
     try:
         image_links = site_response.json()["links"]["flickr"]["original"]
-        if image_links:
-            for image_link in image_links:
-                with open(
-                    f'{IMAGES_PATH}/{exctracts_filename(image_link)}',
-                    'wb'
-                ) as file:
-                    file.write(receives_response_site(image_link).content)
+        for image_link in image_links:
+            image = receives_response_site(image_link).content
+            with open(
+                f'{IMAGES_PATH}/{exctracts_filename(image_link)}',
+                'wb'
+            ) as file:
+                file.write(image)
 
     except AttributeError as e:
         print(f"Невозможно получить атрибут: {e}")

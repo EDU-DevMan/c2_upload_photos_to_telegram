@@ -39,12 +39,13 @@ def main():
     )
 
     try:
-        for link_img in site_response:
+        for image_link in site_response:
+            image = receives_response_site(image_link["url"]).content
             with open(
-                f'{IMAGES_PATH}/{exctracts_filename(link_img["url"])}',
+                f'{IMAGES_PATH}/{exctracts_filename(image_link["url"])}',
                 'wb'
             ) as file:
-                file.write(receives_response_site(link_img["url"]).content)
+                file.write(image)
 
     except TypeError as e:
         print(f"Невозможно получить итерируемый объект: {e}")
